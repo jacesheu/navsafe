@@ -1,0 +1,149 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css"href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+</head>
+
+<style>
+	input{padding: 0px 0px;}
+	select{padding: 1px 0px;}
+</style>
+
+<!-- Build header -->
+<body style='margin: 2'>
+  <div class="page-header" style="text-align: center;">
+    <h1><img src="{{url_for('static', filename='photos/header.png')}}" alt="NavSafe" style="width:700px;height:100px;"></img></h1>
+    <!-- Create form -->
+    <form method="post">
+      <input style="font-size:20px;" name="origin" placeholder='{{org_input}}' readonly> 
+      <input style="font-size:20px;" name="destination" placeholder='{{org_dest}}' readonly> 
+      <select style="font-size:20px;color:grey;" id="time" name="time">
+        <option value="" disabled selected hidden>{{time}}</option>
+      </select>
+      <input style="font-size:20px; color: #436b8b;" type="submit" value="New Route">
+    </form>
+  </div>
+  
+<div style="width: 100%; height: 75%" id="mapContainer">
+</div>
+
+<script>
+
+// Instantiate a map and platform object:
+var platform = new H.service.Platform({
+  'apikey': '{YOUR_API_KEY}' // TO DO Add API Key
+});
+// Retrieve the target element for the map:
+var targetElement = document.getElementById('mapContainer');
+
+// Get the default map types from the platform object:
+var defaultLayers = platform.createDefaultLayers();
+
+// Instantiate the map:
+var map = new H.Map(
+  document.getElementById('mapContainer'),
+  defaultLayers.vector.normal.map,
+  {
+    zoom: 13,
+    center: { lat: 37.773972, lng: -122.431297 },
+    padding: {top: 50, left: 50, bottom: 50, right: 50}
+  });
+
+// Create the parameters for the routing request:
+var routingParameters_safe = {
+  'routingMode': 'fast',
+  'transportMode': 'pedestrian',
+  // The start point of the route:
+  'origin': '{{org_input}}',
+  // The end point of the route:
+  'destination': '{{org_dest}}',
+  // Include the route shape in the response
+  'return': 'polyline',
+  // Avoid areas
+  'avoid[areas]':'{{avoid_bbox}}',
+};
+
+// Define a callback function to process the routing response:
+var onResult_safe = function(result) {
+  // ensure that at least one route was found
+  if (result.routes.length) {
+    result.routes[0].sections.forEach((section) => {
+         // Create a linestring to use as a point source for the route line
+        let linestring = H.geo.LineString.fromFlexiblePolyline(section.polyline);
+
+        // Create a polyline to display the route:
+        let routeLine = new H.map.Polyline(linestring, {
+          style: { strokeColor: 'green', lineWidth: 3 }
+        });
+
+        // Create a marker for the start point:
+        var svgMarkup = '<svg width="70" height="30" ' +
+          'xmlns="http://www.w3.org/2000/svg">' +
+          '<rect stroke="white" fill="#1b468d" x="1" y="1" width="68" ' +
+          'height="28" /><text x="35" y="22" font-size="12pt" ' +
+          'font-family="Arial" font-weight="bold" text-anchor="middle" ' +
+          'fill="white">START</text></svg>';
+        var startIcon = new H.map.Icon(svgMarkup);      
+        let startMarker = new H.map.Marker(section.departure.place.location, {icon: startIcon});
+
+        // Create a marker for the end point:
+        let endMarker = new H.map.Marker(section.arrival.place.location);
+
+        // Add the route polyline and the two markers to the map:
+        map.addObjects([routeLine, startMarker, endMarker]);
+
+        // Set the map's viewport to make the whole route visible:
+        map.getViewModel().setLookAtData({bounds: routeLine.getBoundingBox()}, true);
+    });
+  }
+};
+
+// Get an instance of the routing service version 8:
+var router = platform.getRoutingService(null, 8);
+
+// Call calculateRoute() with the routing parameters,
+// the callback and an error callback function (called if a
+// communication error occurs):
+router.calculateRoute(routingParameters_safe, onResult_safe,
+  function(error) {
+    alert(error.message);
+  });
+
+// Define circle shape style:
+var redStyle = {
+  fillColor: 'rgba(255, 0, 0, 0.25)',
+  lineWidth: 0,
+};
+
+// Retrieve list of areas to avoid:
+var avoid_lat = '{{avoid_lat}}'.split(',');
+var avoid_lon = '{{avoid_lon}}'.split(',');
+
+// Mark all areas to avoid on the map
+for (var i = 0; i < avoid_lat.length; i++) {
+  var circle = new H.map.Circle({lat: avoid_lat[i], lng:avoid_lon[i]}, 120, {style: redStyle});
+  map.addObject(circle);
+};
+
+// Enable the event system on the map instance:
+var mapEvents = new H.mapevents.MapEvents(map);
+
+// Add event listener:
+	  map.addEventListener('tap', function(evt) {
+    	// Log 'tap' and 'mouse' events:
+     	  console.log(evt.type, evt.currentPointer.type); 
+	});
+
+	// Instantiate the default behavior, providing the mapEvents object:
+	 var behavior = new H.mapevents.Behavior(mapEvents);
+
+// Create the default UI:
+  var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+</script>
+</body>
+</html>
