@@ -90,12 +90,7 @@ How to use the NavSafe Web application
 
 Here we are showing a user routing from the SF 4th & King St. Caltrain Station to Brenda’s Soul Food in the afternoon. The app will return a route that avoids nearby risky areas, which are marked with the red circles on the map.
 
-<details>
-  <summary> Click to view </summary>
-
 ![navsafe_ui](./images/ui.gif)
-
-</details>
 
 ## References 
 
