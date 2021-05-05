@@ -20,3 +20,45 @@ Users simply has to enter:
 - Time of day (morning, afternoon, evening, or night)
 
 Navsafe will then generate a route recommendation that is both efficient and safe. It also highlights risky areas in the map that are avoided.
+
+## How NavSafe Works
+
+
+## Running the Code
+
+### Data Pipeline & Processing
+
+### Modeling
+In this session, we will train the model on the final data generated from the data pipeline session. The following is a description of code functions for each part.
+
+<details>
+  <summary> Load Data </summary>
+</details>
+
+<details>
+  <summary> Supervised - Logistic Regression </summary>
+</details>
+
+<details>
+  <summary> Unsupervised - Clustering </summary>
+</details>
+
+<details>
+  <summary> Map Visualization </summary>
+</details>
+
+<details>
+  <summary> Test Set Comparison </summary>
+</details>
+
+<details>
+  <summary> Predict </summary>
+</details>
+
+<details>
+  <summary> Route Comparison </summary>
+</details>
+
+### Web App (UI)
+
+## References 
