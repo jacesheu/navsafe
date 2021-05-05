@@ -23,16 +23,19 @@ Navsafe will then generate a route recommendation that is both efficient and saf
 
 ## How NavSafe Works
 
-
 ## Running the Code
 
 ### Data Pipeline & Processing
+In the 'pipeline.ipynb', the data is first pulled from the SF crime statistics using Socrata. The pulled database is stored as 'clean_data.csv'. 
+The pulled database is then used as input for the notebook 'data_processing.ipynb' which is in charge of generating the 'alternative_classification_data_localized.csv' file. This last CSV file will serve as one of the input to the modeling notebooks. 
 
 ### Modeling
 In this session, we will train the model on the final data generated from the data pipeline session. The following is a description of code functions for each part.
 
 <details>
   <summary> Load Data </summary>
+Import the final crime report data generated from data pipeline and processing called 'alternative_classification_data_localized.csv', as well as the safety survey data that will be used, 'data_neighborhood_safety.csv'.
+
 </details>
 
 <details>
@@ -78,3 +81,15 @@ Here we are showing a user routing from the SF 4th & King St. Caltrain Station t
 </details>
 
 ## References 
+
+Data Sources
+- [San Francisco Police Department Incident Reports Data](https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-2018-to-Present/wg3w-h783)
+- [San Francisco City Survey Data](https://sfgov.org/sfc/citysurvey/about-city-survey)
+
+Documentation
+- [Clustering Model Evaluation and Results](https://docs.google.com/document/d/1JhnNBccKZihytR5tFnNlOQzxFtTyjfl8eINSViorPyQ/edit?usp=sharing)
+
+HERE API Tutorials and Sample Code
+- [Displaying an Interactive Map with Python and Flask](https://developer.here.com/blog/displaying-an-interactive-map-with-python-and-flask-part-2)
+- [HERE Maps API Guide](https://developer.here.com/documentation/maps/3.1.22.1/dev_guide/topics/routing.html)
+
