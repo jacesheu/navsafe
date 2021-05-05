@@ -1,4 +1,5 @@
 # NavSafe
+A Safe Navigation Service App
 
 ## Problem
 Anyone who has ever been in an unfamiliar city knows the feeling of apprehension that comes with navigating on foot from point to point. You want to walk to your destination efficiently, but are also mindful of the desire to stay safe. Without the embedded knowledge of being a local, you don’t know which streets to avoid, particularly in the evenings.
