@@ -61,4 +61,20 @@ In this session, we will train the model on the final data generated from the da
 
 ### Web App (UI)
 
+We used Flask to build the UI and embedded the HERE Routing API, which helps calculate the fastest pedestrian route between multiple points. The data used to calculate the areas to avoid is from the results of the model.
+
+How to use the NavSafe Web application
+1. Retrieve a free API key through a HERE Maps API account
+2. Add API key to the ‘flaskr/templates/map_sf.html’ and ‘flaskr/templates/map_sf_route.html’ templates
+3. Launch the NavSafe app by running the ‘navsafe_main.ipynb’ file
+
+Here we are showing a user routing from the SF 4th & King St. Caltrain Station to Brenda’s Soul Food in the afternoon. The app will return a route that avoids nearby risky areas, which are marked with the red circles on the map.
+
+<details>
+  <summary> Click to view </summary>
+
+![image info](./images/ui.gif)
+
+</details>
+
 ## References 
