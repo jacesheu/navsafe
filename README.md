@@ -71,14 +71,16 @@ Import the final crime report data generated from data pipeline and processing c
 
 <details>
   <summary> Route Comparison </summary>
-  We test these 7 predictions on 2 sample routes to generate the required parameters that will be used in HERE API to find the safest route. Then we will add these parameters into HERE API HTML files to visualize the routes. We can assess these maps and eliminate results that are unhelpful.
+  We test these 7 predictions on 2 sample routes to generate the required parameters that will be used in HERE API to find the safest route. Then we will add these parameters into HERE API HTML files to visualize the routes. We can assess these maps and eliminate results that are unhelpful. The results are documented 
+
+[here](https://docs.google.com/document/d/1JhnNBccKZihytR5tFnNlOQzxFtTyjfl8eINSViorPyQ/edit?usp=sharing). 
+  
 </details>
 
 <details>
   <summary> Conclusion </summary>
   Analyze all the results and conclude that the best model is the agglomerative clustering model with 10 clusters, which we denote as 'agg, 10'.
 </details>
-
 
 ### Web App (UI)
 
