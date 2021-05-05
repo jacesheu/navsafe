@@ -45,27 +45,39 @@ Import the final crime report data generated from data pipeline and processing c
 
 <details>
   <summary> Supervised - Logistic Regression </summary>
+  The previous attempt of using supervised learning. We won’t adapt this method for the final modeling.
 </details>
 
 <details>
   <summary> Unsupervised - Clustering </summary>
+  The current attempt of using unsupervised learning. It contains the tuning and training process for 3 clustering models, K-means, Agglomerative and Gaussian Mixed models.
 </details>
 
 <details>
   <summary> Map Visualization </summary>
+  In this part, we visualize the clustering results of all 6 models and one additional averaged clustering result in HERE API. 
 </details>
 
 <details>
   <summary> Test Set Comparison </summary>
+  We use the labeled test set data to evaluate all 7 clustering models and provide performance scores for them. This part contains 7 sub-sessions for each clustering method and one “compare results” sub-session to compare the scores and find good models among them. The labeled test dataset we used, 'data_testset.csv', has 128 records.
 </details>
 
 <details>
   <summary> Predict </summary>
+  Use the 7 clustering method to predict the dependent variable, avoid or not, for all records.
 </details>
 
 <details>
   <summary> Route Comparison </summary>
+  We test these 7 predictions on 2 sample routes to generate the required parameters that will be used in HERE API to find the safest route. Then we will add these parameters into HERE API HTML files to visualize the routes. We can assess these maps and eliminate results that are unhelpful.
 </details>
+
+<details>
+  <summary> Conclusion </summary>
+  Analyze all the results and conclude that the best model is the agglomerative clustering model with 10 clusters, which we denote as 'agg, 10'.
+</details>
+
 
 ### Web App (UI)
 
