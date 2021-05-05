@@ -21,7 +21,12 @@ Users simply has to enter:
 
 Navsafe will then generate a route recommendation that is both efficient and safe. It also highlights risky areas in the map that are avoided.
 
-## How NavSafe Works
+<details>
+  <summary> Click to view sample route </summary>
+
+![navsafe_sample_route](./images/sample_route.png)
+
+</details>
 
 ## Running the Code
 
@@ -76,7 +81,7 @@ Here we are showing a user routing from the SF 4th & King St. Caltrain Station t
 <details>
   <summary> Click to view </summary>
 
-![image info](./images/ui.gif)
+![navsafe_ui](./images/ui.gif)
 
 </details>
 
