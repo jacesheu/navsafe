@@ -13,7 +13,7 @@ Existing solutions do little to address this major issue:
 - Using online crime heat maps doesn’t give sufficient granularity - these tools often mark off entire neighborhoods, which isn’t useful.
 
 ## Solution
-NavSafe uses historical crime statistics, data from safety surveys, and clustering models to generate an intelligence overview of dangerous areas in a city. 
+NavSafe uses historical crime statistics, data from safety surveys, and clustering models to generate an intelligent overview of dangerous areas in a city. 
 
 Users simply has to enter: 
 - Longitude & latitude of starting point
